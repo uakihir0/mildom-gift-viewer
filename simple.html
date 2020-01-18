@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <meta name="Description" content="">
+    <title>Mildom GiftView</title>
+
+    <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./js/velocity.min.js"></script>
+
+    <!-- For OBS Cache -->
+    <script>
+        $(function () {
+            var date = (new Date).getTime();
+
+            // Add WebSocket Client Script
+            var script = document.createElement('script');
+            script.src = './js/ws_client.js?' + date;
+            script.type = 'text/javascript'
+            $('head script:last').after(script);
+            
+            // Add Main Script
+            script = document.createElement('script');
+            script.src = './js/main.js?' + date;
+            script.type = 'text/javascript'
+            $('head script:last').after(script);
+        });
+    </script>
+
+    <script>
+        $(function () {
+            var date = (new Date).getTime();
+
+            // Add StyleSheet
+            var link = document.createElement('link');
+            link.href = './css/comment.css?' + date;
+            link.type = 'text/css'
+            link.rel = 'stylesheet'
+            $('head link:last').after(link);
+        });
+    </script>
+
+<BODY>
+    <div id="image_box" class="image_box">
+    </div>
+</BODY>
+</HTML>
