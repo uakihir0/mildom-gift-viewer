@@ -2,7 +2,7 @@
 .stamp {
     position: absolute;
     height: 60px;
-    width: 78px;
+    width: auto;
 }
 
 .image_box {
