@@ -18,6 +18,11 @@
 
 　本ツールは [developer-kui/HTMLViewer](https://github.com/developer-kui/HTMLViewer) さんを参考に実装しました。 Mildom の配信ツールを初期の段階から充実していただいた kui さんに感謝します。
 
+
+# 免責事項
+
+　本ツールの使用において、自己責任でお願いします。サポートや要望についてはできる範囲で対応します。
+
 # 作者
 
 [うるし|@U_Akihir0](https://twitter.com/U_Akihir0) 
