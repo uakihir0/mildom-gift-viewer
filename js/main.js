@@ -26,6 +26,13 @@ $(function () {
                     "name": model.name,
                     "url": model.pic }
             }
+            for (gift in result.body.pack) {
+                let model = result.body.models[gift];
+                gift_map[model.gift_id] = {
+                    "price": model.price,
+                    "name": model.name,
+                    "url": model.pic }
+            }
         }, function () {});
     }
 
