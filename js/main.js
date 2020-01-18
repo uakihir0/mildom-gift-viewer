@@ -27,7 +27,7 @@ $(function () {
                     "url": model.pic }
             }
             for (gift in result.body.pack) {
-                let model = result.body.models[gift];
+                let model = result.body.pack[gift];
                 gift_map[model.gift_id] = {
                     "price": model.price,
                     "name": model.name,
