@@ -53,7 +53,6 @@ $(function () {
             createImage(json.giftId, json.count, complete_function);
             playSoundEffect();
         }
-        }
 
         complete_function()
     }
