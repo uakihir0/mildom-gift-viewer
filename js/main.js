@@ -3,8 +3,15 @@ $(function () {
     // 対象者の Mildom ID
     const mildom_id = 10000000;
 
+    // 効果音ファイルパス名
+    // 音声を鳴らさない場合は 空文字 or null に設定
+    const sound_file = "./audio/effect.mp3";
+
     // 画像を表示する DIV を取得
     const image_box = $('#image_box');
+
+    // 音声を表示する AUDIO を取得
+    const audio_box = $('#audio_box');
     
     // ギフト情報
     var gift_map = {}
@@ -44,6 +51,8 @@ $(function () {
         // ギフトが送信された場合のみ対応
         if (json.cmd == "onGift") {
             createImage(json.giftId, json.count, complete_function);
+            playSoundEffect();
+        }
         }
 
         complete_function()
@@ -97,7 +106,23 @@ $(function () {
         });        
     }
 
+    //　サンドエフェクト再生準備 
+    function initializeSoundEffect() {
+        if (sound_file) {
+            audio_box.attr("src", sound_file);  
+            audio_box.get(0).volume = 0.2;
+        }
+    }
+
+    // サウンドエフェクト再生
+    function playSoundEffect(){
+        if (sound_file) {
+            audio_box.get(0).play();
+        }
+    }
+
     getGiftInfo();
+    initializeSoundEffect();
     startToLissten(eventListenner);
     startConnectToMildom(mildom_id);
 });

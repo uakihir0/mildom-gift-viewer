@@ -73,17 +73,53 @@ function sendComment() {
 
 // OnOpen 
 function onOpen(event) {
+    let user_name = getRandomUserName()
+    let guest_id = getRandomGuestId()
 
+    let time = new Date().toISOString();    
+    let user_agent = window.navigator.userAgent;
+    
     // Cmd EnterRoom
-    var initialize = {
-        "cmd": "enterRoom",
+    let initialize = {
+        "userId": 0,
+        "level": 1,
+        "userName": user_name,
+        "guestId": guest_id,
+        "nonopara": "fr=web`sfr=pc`devi=undefined`la=ja`gid=" + guest_id + 
+        "`na=Japan`loc=Japan|Tokyo`clu=aws_japan`wh=3360*2100`rtm="+ time + 
+        "`ua=" + user_agent + "`aid=" + user_id + "`live_type=2`live_subtype=2`isHomePage=false",
         "roomId": user_id,
-        "userName": "guest",
-        "guestId": "pc",
-        "reConnect": 1
+        "cmd":"enterRoom",
+        "reConnect":1,
+        "nobleLevel":0,
+        "avatarDecortaion":0,
+        "enterroomEffect":0,
+        "nobleClose":0,
+        "nobleSeatClose":0,
+        "reqId":1
     }
 
     web_socket.send(JSON.stringify(initialize));
+}
+
+function getRandomUserName(){
+    var list = "0123456789";
+    return "guest" + randomString(list, 6);
+}
+
+function getRandomGuestId(){
+    var list = "abcdef0123456789";
+    return "pc-gp-" 
+    + randomString(list, 8)
+    + "-" + randomString(list, 4)
+    + "-" + randomString(list, 4)
+    + "-" + randomString(list, 4)
+    + "-" + randomString(list, 12);
+}
+
+function randomString(list, length){
+    return Array.from(Array(length))
+        .map(() => list[Math.floor(Math.random()*list.length)]).join('')
 }
 
 // OnMessage
