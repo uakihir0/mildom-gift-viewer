@@ -25,7 +25,7 @@
 
 # 作者
 
-[うるし|@U_Akihir0](https://twitter.com/U_Akihir0) 
+[うるし|@uakihir0](https://twitter.com/uakihir0) 
 
 # ライセンス
 
