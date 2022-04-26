@@ -19,6 +19,9 @@ let event_listener = null;
 // Default Mildom WebSocket endpoints
 const MILDOM_WS_URL = "wss://jp-room1.mildom.com/?roomId=";
 
+// Mildom xxtea Encryption Key
+const PASSWORD = "32l*!i1^l56e%$xnm1j9i@#$cr&";
+
 /**
  * Mildom の WebSocket サーバーに接続
  * 特定のユーザーの配信のイベントを取得する
@@ -48,6 +51,7 @@ function startToLissten(listener) {
 
 function open() {
     web_socket = new WebSocket(web_socket_url);
+    web_socket.binaryType = 'arraybuffer';
 
     // Setting EventHandler
     web_socket.onopen = onOpen;
@@ -99,7 +103,28 @@ function onOpen(event) {
         "reqId":1
     }
 
-    web_socket.send(JSON.stringify(initialize));
+    let enced = xxtea.encrypt(
+        xxtea.toBytes(JSON.stringify(initialize)), 
+        xxtea.toBytes(PASSWORD)
+    );
+
+    web_socket.send(getPrefixedArrayBuffer(enced));
+}
+
+function getPrefixedArrayBuffer(data){
+    let len = data.length;
+    let buffer = new ArrayBuffer(8 + len);
+    let view = new DataView(buffer);
+
+    view.setUint16(0, 4);
+    view.setUint8(2, 1);
+    view.setUint8(3, 1);
+    view.setUint32(4, len);
+
+    for(i=0; i < len; i += 1){
+        view.setUint8(8 + i, data[i]);
+    }
+    return buffer
 }
 
 function getRandomUserName(){
@@ -125,7 +150,15 @@ function randomString(list, length){
 // OnMessage
 function onMessage(event) {
     if (event && event.data) {
-        let json = $.parseJSON(event.data);
+
+        let sliced = event.data.slice(8);
+        let deced = xxtea.decrypt(
+            new Uint8Array(sliced), 
+            xxtea.toBytes(PASSWORD)
+        );
+
+        let str = xxtea.toString(deced);
+        let json = $.parseJSON(str);
         events_list.push(json);
     }
 }
