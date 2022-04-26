@@ -11,3 +11,7 @@ xxtea は、共通鍵暗号になっており、暗号化・復号化共に、�
 xxtea については以下のライブラリを用いて実装しています。
 
 - [xxtea](https://github.com/xxtea/xxtea-html5)
+
+また、先人の参考になるコードは以下に記載します。
+
+- [MultiCommentViewer](https://github.com/CommentViewerCollection/MultiCommentViewer/commit/3b76512c7efc7e7c7dcbc06bf928ee1aa77a1097)
